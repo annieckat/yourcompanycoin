@@ -37,7 +37,7 @@ def build_add_user_modal(mysql_cn):
 			},
 			"label": {
 				"type": "plain_text",
-				"text": "Who you want to add to YourCorpCoin app?"
+				"text": "Who you want to add to YourCompanyCoin app?"
 			}
 		},
 		{

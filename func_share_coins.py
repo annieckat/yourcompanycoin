@@ -52,7 +52,7 @@ def share_coins(client,mysql_cn,user_id,receiver_id,amount,comment,cfs_balance,f
         return('error','')
     mysql_cn.commit()
     mycursor.close()
-    msg=f'''<@{user_id}> has just transferred you {amount} YourCorpCoins.'''
+    msg=f'''<@{user_id}> has just transferred you {amount} YourCompanyCoins.'''
     if comment!=None:
         msg=msg+f''' With comment: "{comment}"'''  
     client.chat_postMessage(channel=receiver_id, 

@@ -40,7 +40,7 @@ def share_team_coins(client,mysql_cn,user_id,team_id,receiver_id,amount,comment,
     mysql_cn.commit()
     mycursor.close()
     print('test556:','commited transfer')
-    msg=f'''Your teamlead has just transferred you {amount} YourCorpCoins.'''
+    msg=f'''Your teamlead has just transferred you {amount} YourCompanyCoins.'''
     if comment!=None:
         msg=msg+f''' With comment: "{comment}"'''  
     client.chat_postMessage(channel=receiver_id, 

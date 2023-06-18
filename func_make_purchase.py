@@ -45,7 +45,7 @@ def make_purchase(client,mysql_cn,user_id,item_id):
     admins_list=db_data.get_admins_list()
     for admin_id in admins_list:
         client.chat_postMessage(channel=admin_id, #later change to list of admins user_ids (from db) and add for-cycle
-                                text=f'''<@{user_id}> purchased {new_purchase[4]} for {new_purchase[3]} YourCorpCoins (id={purchase_id})''')
+                                text=f'''<@{user_id}> purchased {new_purchase[4]} for {new_purchase[3]} YourCompanyCoins (id={purchase_id})''')
     try:
         gs_cn=ServicesConnector().gs_connect()
         sh = gs_cn.open_by_key(os.environ.get('SPREADSHEETS_MERCH_FILE'))

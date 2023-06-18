@@ -1,4 +1,4 @@
-# YourCorpCoin
+# YourCompanyCoin
 Slack app that introduces your company's local currency that can be exchanged between workspace members, handed out as a reward by teamleads and used to buy merchandise. 
 
 ## Basic idea
@@ -17,12 +17,12 @@ The app infrastructure consists of:
     *  **MySQL Procedure monthly_transfer**
     *  **MySQL Event trigger_monthly_transfer**
 * **Slack app** - You should create an app with several permissions (it can view members of a workspace, write and read messages in the chats it is added to). When you deploy the service, your app will have a home page with several command buttons (buttons visibility depend on the permissions of the user). When user clicks the buttons slack sends a request to the app. 
-* **Google Drive Folder** Before deploying the service you should create a google drive folder with two docs that will be used as a part of YourCorpCoin interface to handle more complicated data. There should be a file with users and teams data (should contain all the initial users data and should be updated by the app only) and a file with merchandise and purchases data (is supposed to be used by YourCorpCoin admins to update merch items and keep track of the users purchases). You can see the example here: https://drive.google.com/drive/u/0/folders/1RmdJUItkQOpkYVbpFZ1yciVt_uUgVO9x
+* **Google Drive Folder** Before deploying the service you should create a google drive folder with two docs that will be used as a part of YourCompanyCoin interface to handle more complicated data. There should be a file with users and teams data (should contain all the initial users data and should be updated by the app only) and a file with merchandise and purchases data (is supposed to be used by YourCompanyCoin admins to update merch items and keep track of the users purchases). You can see the example here: https://drive.google.com/drive/u/0/folders/1RmdJUItkQOpkYVbpFZ1yciVt_uUgVO9x
 
 ## Tech requirements
 * The app should be run with **3.7.4 python**
 * The app should be permanenty available for slack requests
-* **MySQL DB** schema should be created (app was tested on 8.0.26 MySQL version) - `CREATE SCHEMA yourcorpcoin DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`
+* **MySQL DB** schema should be created (app was tested on 8.0.26 MySQL version) - `CREATE SCHEMA YourCompanyCoin DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`
 * <details>
         <summary><strong>MySQL Procedure monthly_transfer</strong> should be created in db after app launch (expand to view query)</summary>
         <code>

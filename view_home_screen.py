@@ -16,7 +16,7 @@ def build_home_screen(user_id,mysql_cn):
         			"type": "section",
         			"text": {
         				"type": "mrkdwn",
-        				"text": f"Hey, <@{user_id}>! Welcome to your personal YourCorpCoin account! You can view you balance and manage your coins right here. What are you planning on doing now?"
+        				"text": f"Hey, <@{user_id}>! Welcome to your personal YourCompanyCoin account! You can view you balance and manage your coins right here. What are you planning on doing now?"
         			}
         		},
                 {
@@ -225,7 +225,7 @@ def build_home_screen(user_id,mysql_cn):
         			"type": "section",
         			"text": {
         				"type": "mrkdwn",
-        				"text": "Sorry, you don't have an access to YourCorpCoin service. Please, contact HR for more information"
+        				"text": "Sorry, you don't have an access to YourCompanyCoin service. Please, contact HR for more information"
         			}
         		}]
     home_screen['blocks']=home_screen_blocks

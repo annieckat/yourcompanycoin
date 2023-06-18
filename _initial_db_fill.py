@@ -1,4 +1,4 @@
-#'''CREATE SCHEMA yourcorpcoin DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci'''
+#'''CREATE SCHEMA yourcompanycoin DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci'''
 import os
 import pygsheets
 import numpy as np
@@ -27,17 +27,17 @@ def fill_db(mysql_cn):
     mycursor = mysql_cn.cursor()
 
     #DELETE TABLES
-    mycursor.execute('''DROP TABLE IF EXISTS yourcorpcoin.purchases''')
-    mycursor.execute('''DROP TABLE IF EXISTS yourcorpcoin.items''')
-    mycursor.execute('''DROP TABLE IF EXISTS yourcorpcoin.internal_transfers''')
-    mycursor.execute('''DROP TABLE IF EXISTS yourcorpcoin.external_transfers''')
-    mycursor.execute('''DROP TABLE IF EXISTS yourcorpcoin.accounts''')
-    mycursor.execute('''DROP TABLE IF EXISTS yourcorpcoin.users''')
-    mycursor.execute('''DROP TABLE IF EXISTS yourcorpcoin.teams''')
+    mycursor.execute('''DROP TABLE IF EXISTS yourcompanycoin.purchases''')
+    mycursor.execute('''DROP TABLE IF EXISTS yourcompanycoin.items''')
+    mycursor.execute('''DROP TABLE IF EXISTS yourcompanycoin.internal_transfers''')
+    mycursor.execute('''DROP TABLE IF EXISTS yourcompanycoin.external_transfers''')
+    mycursor.execute('''DROP TABLE IF EXISTS yourcompanycoin.accounts''')
+    mycursor.execute('''DROP TABLE IF EXISTS yourcompanycoin.users''')
+    mycursor.execute('''DROP TABLE IF EXISTS yourcompanycoin.teams''')
 
     #CREATE TABLES
     create_teams_query='''
-    CREATE TABLE yourcorpcoin.teams (
+    CREATE TABLE yourcompanycoin.teams (
         team_id varchar(20) NOT NULL,
         monthly_transfer FLOAT NOT NULL,
     	created_at DATETIME NOT NULL,
@@ -50,7 +50,7 @@ def fill_db(mysql_cn):
     COLLATE=utf8mb4_unicode_ci
     '''
     create_users_query='''
-    CREATE TABLE yourcorpcoin.users (
+    CREATE TABLE yourcompanycoin.users (
     	user_id varchar(30) NOT NULL,
     	user_name varchar(50) NULL,
     	team_id varchar(20) NOT NULL,
@@ -61,14 +61,14 @@ def fill_db(mysql_cn):
     	updated_at DATETIME NOT NULL,
         is_deleted TINYINT DEFAULT 0 NOT NULL,
     	CONSTRAINT users_PK PRIMARY KEY (user_id),
-    	CONSTRAINT users_FK FOREIGN KEY (team_id) REFERENCES yourcorpcoin.teams(team_id)
+    	CONSTRAINT users_FK FOREIGN KEY (team_id) REFERENCES yourcompanycoin.teams(team_id)
     )
     ENGINE=InnoDB
     DEFAULT CHARSET=utf8mb4
     COLLATE=utf8mb4_unicode_ci
     '''
     create_accounts_query='''
-    CREATE TABLE yourcorpcoin.accounts (
+    CREATE TABLE yourcompanycoin.accounts (
     	account_id varchar(50) NOT NULL,
     	account_type varchar(10) NOT NULL,
     	user_id varchar(30) NULL,
@@ -77,8 +77,8 @@ def fill_db(mysql_cn):
     	free_use_coins FLOAT NULL,
     	updated_at DATETIME NOT NULL,
     	CONSTRAINT accounts_PK PRIMARY KEY (account_id),
-    	CONSTRAINT accounts_FK FOREIGN KEY (user_id) REFERENCES yourcorpcoin.users(user_id),
-    	CONSTRAINT accounts_FK_1 FOREIGN KEY (team_id) REFERENCES yourcorpcoin.teams(team_id),
+    	CONSTRAINT accounts_FK FOREIGN KEY (user_id) REFERENCES yourcompanycoin.users(user_id),
+    	CONSTRAINT accounts_FK_1 FOREIGN KEY (team_id) REFERENCES yourcompanycoin.teams(team_id),
         CONSTRAINT cfs_null_or_positive CHECK ((coins_for_share>=0 or coins_for_share is null)),
         CONSTRAINT fuc_null_or_positive CHECK ((free_use_coins>=0 or free_use_coins is null))
     )
@@ -88,7 +88,7 @@ def fill_db(mysql_cn):
     '''
 
     create_external_transfers_query='''
-    CREATE TABLE yourcorpcoin.external_transfers (
+    CREATE TABLE yourcompanycoin.external_transfers (
     	external_transfer_id INT auto_increment NOT NULL,
     	sender_account_id varchar(50) NOT NULL,
     	receiver_account_id varchar(50) NOT NULL,
@@ -98,28 +98,28 @@ def fill_db(mysql_cn):
     	created_at DATETIME NOT NULL,
     	comment varchar(200) NULL,
     	CONSTRAINT external_transfers_PK PRIMARY KEY (external_transfer_id),
-    	CONSTRAINT external_transfers_FK FOREIGN KEY (sender_account_id) REFERENCES yourcorpcoin.accounts(account_id),
-    	CONSTRAINT external_transfers_FK_1 FOREIGN KEY (receiver_account_id) REFERENCES yourcorpcoin.accounts(account_id)
+    	CONSTRAINT external_transfers_FK FOREIGN KEY (sender_account_id) REFERENCES yourcompanycoin.accounts(account_id),
+    	CONSTRAINT external_transfers_FK_1 FOREIGN KEY (receiver_account_id) REFERENCES yourcompanycoin.accounts(account_id)
     )
     ENGINE=InnoDB
     DEFAULT CHARSET=utf8mb4
     COLLATE=utf8mb4_unicode_ci;
     '''
     create_internal_transfers_query='''
-    CREATE TABLE yourcorpcoin.internal_transfers (
+    CREATE TABLE yourcompanycoin.internal_transfers (
     	internal_transfer_id INT auto_increment NOT NULL,
     	account_id varchar(50) NOT NULL,
     	coins_sent FLOAT NOT NULL,
     	created_at DATETIME NOT NULL,
     	CONSTRAINT internal_transfers_PK PRIMARY KEY (internal_transfer_id),
-    	CONSTRAINT internal_transfers_FK FOREIGN KEY (account_id) REFERENCES yourcorpcoin.accounts(account_id)
+    	CONSTRAINT internal_transfers_FK FOREIGN KEY (account_id) REFERENCES yourcompanycoin.accounts(account_id)
     )
     ENGINE=InnoDB
     DEFAULT CHARSET=utf8mb4
     COLLATE=utf8mb4_unicode_ci;
     '''
     create_items_query='''
-    CREATE TABLE yourcorpcoin.items (
+    CREATE TABLE yourcompanycoin.items (
     	item_id INT auto_increment NOT NULL,
     	item_name varchar(200) NOT NULL,
     	item_cost FLOAT NOT NULL,
@@ -130,7 +130,7 @@ def fill_db(mysql_cn):
     COLLATE=utf8mb4_unicode_ci;
     '''
     create_purchases_query='''
-    CREATE TABLE yourcorpcoin.purchases (
+    CREATE TABLE yourcompanycoin.purchases (
     	purchase_id INT auto_increment NOT NULL,
     	account_id varchar(50) NOT NULL,
     	item_cost FLOAT NOT NULL,
@@ -138,7 +138,7 @@ def fill_db(mysql_cn):
     	created_at DATETIME NOT NULL,
         status varchar(20) DEFAULT 'waiting' NOT NULL,
     	CONSTRAINT purchases_PK PRIMARY KEY (purchase_id),
-    	CONSTRAINT purchases_FK FOREIGN KEY (account_id) REFERENCES yourcorpcoin.accounts(account_id)
+    	CONSTRAINT purchases_FK FOREIGN KEY (account_id) REFERENCES yourcompanycoin.accounts(account_id)
     )
     ENGINE=InnoDB
     DEFAULT CHARSET=utf8mb4

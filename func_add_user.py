@@ -29,7 +29,7 @@ def add_user(client,mysql_cn,user_id,new_user_id,new_user_name,new_user_team_id,
     new_user=pd.read_sql(f"""select user_id, user_name, team_id, is_teamlead, is_admin, monthly_coins_for_share from users where user_id='{new_user_id}'""",con=mysql_cn)
     new_user=list(new_user.to_records())[0]
     new_user=[str(i) for i in new_user][1:]
-    msg=f'''Welcome to YourCorpCoin! :tada:'''
+    msg=f'''Welcome to YourCompanyCoin! :tada:'''
     client.chat_postMessage(channel=new_user_id, 
                             text=msg)
     try:

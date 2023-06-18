@@ -185,7 +185,7 @@ def view_submission(ack, body, client, view):
     fuc_balance=user_db_data.get_fuc_balance()
     errors={}
     if receiver_id not in users_list:
-        errors["share_coins_select_user_block"] = f"This user doesn't have YourCorpCoin account yet. Please, contact HR"
+        errors["share_coins_select_user_block"] = f"This user doesn't have YourCompanyCoin account yet. Please, contact HR"
     elif receiver_id==user_id:
         errors["share_coins_select_user_block"] = f"You can't transfer coins to yourself"
     if not amount.isdigit():
@@ -254,7 +254,7 @@ def view_submission(ack, body, client, view):
     team_balance=db_data.get_team_balance(team_id)
     errors={}
     if receiver_id not in users_list:
-        errors["share_team_coins_select_user_block"] = f"This user doesn't have YourCorpCoin account yet. Please, contact HR"
+        errors["share_team_coins_select_user_block"] = f"This user doesn't have YourCompanyCoin account yet. Please, contact HR"
     elif receiver_id not in team_users_list:
         errors["share_team_coins_select_user_block"] = f"This user is not in your team. Please, contact HR in case of mistake"
     if not amount.isdigit():
@@ -295,7 +295,7 @@ def view_submission(ack, body, client, view):
     users_list=db_data.get_users_list()
     errors={}
     if new_user_id in users_list:
-        errors["add_user_select_user_block"] = f"This user has already YourCorpCoin account."
+        errors["add_user_select_user_block"] = f"This user has already YourCompanyCoin account."
     if not new_user_monthly_coins_for_share.isdigit():
         errors["add_user_monthly_coins_for_share_block"] = "Please, enter an integer"
     if len(errors)>0:
@@ -309,7 +309,7 @@ def view_submission(ack, body, client, view):
         try:
             response=add_user(client,mysql_cn,user_id,new_user_id,new_user_name,new_user_team_id,new_user_is_teamlead,new_user_is_admin,new_user_monthly_coins_for_share)
             if response=='ok':
-                msg = f"""New user <@{new_user_id}> has been added to YourCorpCoin successfully!"""+warning
+                msg = f"""New user <@{new_user_id}> has been added to YourCompanyCoin successfully!"""+warning
             if response=='error':
                 msg = "Something went wrong while adding a user. :sad_pepe: Please, try again later or contact developer."
         except Exception as e:
@@ -329,7 +329,7 @@ def view_submission(ack, body, client, view):
     users_list=db_data.get_users_list()
     errors={}
     if user_to_update_id not in users_list:
-        errors["update_user_select_user_block"] = f"This user doesn't have YourCorpCoin account yet. Please, add user to app." 
+        errors["update_user_select_user_block"] = f"This user doesn't have YourCompanyCoin account yet. Please, add user to app." 
     if (not user_to_update_monthly_coins_for_share.isdigit()) and user_to_update_monthly_coins_for_share!="-":
         errors["update_user_monthly_coins_for_share_block"] = "Please, enter an integer"
     if len(errors)>0:
@@ -372,7 +372,7 @@ def view_submission(ack, body, client, view):
     users_list=db_data.get_users_list()
     errors={}
     if user_to_delete_id not in users_list:
-        errors["delete_user_select_user_block"] = f"This user doesn't have YourCorpCoin account yet. Please, add user to app." 
+        errors["delete_user_select_user_block"] = f"This user doesn't have YourCompanyCoin account yet. Please, add user to app." 
     if len(errors)>0:
         ack(response_action="errors", errors=errors)
     else:
@@ -402,7 +402,7 @@ def view_submission(ack, body, client, view):
     teams_list=db_data.get_teams_list()
     errors={}
     if new_team_id in teams_list:
-        errors["add_team_enter_team_block"] = f"This team has already YourCorpCoin account."
+        errors["add_team_enter_team_block"] = f"This team has already YourCompanyCoin account."
     if not monthly_transfer.isdigit():
         errors["add_team_enter_monthly_transfer_block"] = "Please, enter an integer"
     if len(errors)>0:
@@ -412,7 +412,7 @@ def view_submission(ack, body, client, view):
         try:
             response=add_team(client,mysql_cn,user_id,new_team_id,int(monthly_transfer))
             if response=='ok':
-                msg = f"""New team "{new_team_id}" has been added to YourCorpCoin successfully! :rocket_ch:"""
+                msg = f"""New team "{new_team_id}" has been added to YourCompanyCoin successfully! :rocket_ch:"""
             if response=='error':
                 msg = "Something went wrong while adding a team. :sad_pepe: Please, try again later or contact developer."
         except Exception as e:
@@ -496,7 +496,7 @@ def view_submission(ack, body, client, view):
     users_list=db_data.get_users_list()
     errors={}
     if receiver_id not in users_list:
-        errors["make_refund_select_user_block"] = f"This user doesn't have YourCorpCoin account yet."
+        errors["make_refund_select_user_block"] = f"This user doesn't have YourCompanyCoin account yet."
     elif receiver_id==user_id:
         errors["make_refund_select_user_block"] = f"You can't transfer coins to yourself"
     if not amount.isdigit():

@@ -29,7 +29,7 @@ def make_refund(client,mysql_cn,user_id,receiver_id,amount,comment):
         return('error','')
     mysql_cn.commit()
     mycursor.close()
-    msg=f'''<@{user_id}> has refunded you {amount} YourCorpCoins for {comment}.'''
+    msg=f'''<@{user_id}> has refunded you {amount} YourCompanyCoins for {comment}.'''
     client.chat_postMessage(channel=receiver_id, 
                             text=msg)
     return('ok',transfer_id)
