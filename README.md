@@ -1,6 +1,10 @@
 # YourCorpCoin
 Slack app that introduces your company's local currency that can be exchanged between workspace members, handed out as a reward by teamleads and used to buy merchandise. 
 
+## Basic idea
+Every user has 2 accounts: coins-for-share account and free-use-coins account. Also, every team has coins-for-share account. Each account is replenished monthly (unused coins can be saved). Users can transfer coins to each other as gifts or as a way of saying thank you. Coins can be transferred from any account but only free-use-coins account can be used to buy merch. Team coins can be distributed between team members by teamlead. When user receives coins from other user or team account they go to free-use-coins account, that way sharing is encouraged.
+The app can execute different commands depending on user's permission level. There is 3 types of commands and 3 permission levels: user permission, teamlead permission and admin permission. All users can share coins and buy merchendise, teamleads can share team coins, admins can update users, teams and merchendise data and make refunds.
+
 ## Tech description
 The app infrastructure consists of:
 * **MySQL database** - It should be created and filled before deployment of the app. It stores data about:
@@ -11,7 +15,7 @@ The app infrastructure consists of:
     *  **Merchandise purchases history**
     *  **MySQL Procedure monthly_transfer**
     *  **MySQL Event trigger_monthly_transfer**
-* **Slack app** - You should create an app with several permissions (it can view members of a workspace, write and read messages in the chats it is added to). When you deploy the service, your app will have a home page with several command buttons (buttons visibility depend on the permissions of the user). When user clicks the buttons slack sends a request to the app. There will be 3 types of commands and 3 permission levels: user permission, teamlead permission, admin permission. Users can share coins and buy merchendise, teamleads can share team coins, admins can add/update/delete users,teams and merchendise items as well as make refunds.
+* **Slack app** - You should create an app with several permissions (it can view members of a workspace, write and read messages in the chats it is added to). When you deploy the service, your app will have a home page with several command buttons (buttons visibility depend on the permissions of the user). When user clicks the buttons slack sends a request to the app. 
 * **Google Drive Folder** Before deploying the service you should create a google drive folder with two docs that will be used as a part of YourCorpCoin interface to handle more complicated data. There should be a file with users and teams data (should contain all the initial users data and should be updated by the app only) and a file with merchandise and purchases data (is supposed to be used by YourCorpCoin admins to update merch items and keep track of the users purchases). You can see the example here: https://drive.google.com/drive/u/0/folders/1RmdJUItkQOpkYVbpFZ1yciVt_uUgVO9x
 
 ## Tech requirements
@@ -60,7 +64,7 @@ The app infrastructure consists of:
         </details>
 * App consists of:
     * **app.py** - main script that receives slack requests (should run permanently)
-    * **additional scripts** that are imported and used by app.py - all the scripts starting with "class\_" (main *app* classes), "func\_" (separate functions that run transactions and update db data) or "view\_" (render different screens that app shows to users)
+    * **additional scripts** that are imported and used by app.py - all the scripts starting with "class\_" (main app classes), "func\_" (separate functions that run transactions and update db data) or "view\_" (render different screens that app shows to users)
     * **\_initial\_db\_fill.py** script that should be run before launch of app.py. It creates tables in DB and fills them with initial data from google spreadsheet files.
     * **{YOUR_FILE_NAME}.json** - file with google service account credentials (that have access to google spreadsheet files)
     * **requirements.txt** - file with required python libraries list. They can be installed with following command `pip3 install -r requirements.txt`
