@@ -3,7 +3,8 @@ Slack app that introduces your company's local currency that can be exchanged be
 
 ## Basic idea
 Every user has 2 accounts: coins-for-share account and free-use-coins account. Also, every team has coins-for-share account. Each account is replenished monthly (unused coins can be saved). Users can transfer coins to each other as gifts or as a way of saying thank you. Coins can be transferred from any account but only free-use-coins account can be used to buy merch. Team coins can be distributed between team members by teamlead. When user receives coins from other user or team account they go to free-use-coins account, that way sharing is encouraged.
-The app can execute different commands depending on user's permission level. There is 3 types of commands and 3 permission levels: user permission, teamlead permission and admin permission. All users can share coins and buy merchendise, teamleads can share team coins, admins can update users, teams and merchendise data and make refunds.
+
+The app can execute different commands depending on user's permission level. There are 3 permission levels: user permission, teamlead permission and admin permission. All users can share coins and buy merchandise, teamleads can share team coins, admins can update users, teams and merchandise data and make refunds.
 
 ## Tech description
 The app infrastructure consists of:
